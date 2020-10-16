@@ -1,4 +1,5 @@
-library(rcap)
+library(rcapture)
+library(testthat)
 context("Testing the creation of our leaflet maps and related functions")
 
 test_that("eq_map runs without error", {
@@ -6,7 +7,7 @@ test_that("eq_map runs without error", {
     eq_clean_data() %>%
     dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 2000) %>%
     eq_map(annot_col = "date")
-  
+
   expect_is(map, "leaflet")
   expect_is(map, "htmlwidget")
 })

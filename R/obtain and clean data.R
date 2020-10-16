@@ -77,6 +77,8 @@ get_date <- function(days, months, years){
 }
 
 #---------------------------------------------------------------------------------------------
+#' @name eq_clean_data
+#'
 #' @title Clean the raw NOAA earthquake data
 #'
 #' @description This function takes the raw NOAA data and cleans it
@@ -107,7 +109,8 @@ eq_clean_data <- function(earthquake_data_raw){
     return(earthquake_data)
 }
 #----------------------------------------------------------------------------------------------
-
+#' @name eq_location_clean
+#'
 #' @title Location_NAME column
 #'
 #' @description eq_clean_data () function also needs functionality of clean LOCATION_NAME that is

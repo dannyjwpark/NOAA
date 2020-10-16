@@ -1,5 +1,7 @@
 #---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
+#' @name geom_timeline
+#'
 #' @title Module 2: Visualization tools: geom_timeline()
 #'
 #' @description Building geom_timeline()
@@ -64,7 +66,9 @@ geom_timeline <- function(mapping = NULL, data = NULL,
 
 #---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
-#' @title Visualization tool: geom_timeline_lael
+#' @name geom_timeline_label
+#'
+#' @title Visualization tool: geom_timeline_label
 #'
 #' @description Scripting geom_timeline_label function
 #' geom function aims to take nmax value of earthquakes as vertical line label
@@ -122,6 +126,8 @@ geom_timeline_label <- function(mapping = NULL, data = NULL,
 #---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
 
+#' @name GeomTimeline
+#'
 #' @title Defines Our GeomTimeline class
 #'
 #' @description As per the course materials:
@@ -187,6 +193,8 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
 )
 #---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
+#' @name GeomTimelineLabel
+#'
 #' @title Defining GeomTimelineLabel class
 #'
 #' @description
@@ -248,6 +256,8 @@ grid::gList(line, text)
 
 #---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
+#' @name plot_earthquakes_timeline
+#'
 #' @title Plot the earthquake timeline and optionally save
 #'
 #' @description Given a subset of earthquake data (earthquake_data) this will plot the
@@ -286,6 +296,8 @@ plot_earthquakes_timeline <- function(earthquake_data, save_png=FALSE){
 
 #---------------------------------------------------------------------------------
 #---------------------------------------------------------------------------------
+#' @name plot_earthquakes_timeline_label
+#'
 #' @title Plot the earthquake timeline with label annotations and optionally save
 #'
 #' @description Given a subset of earthquake data (earthquake_data) this will plot the

@@ -1,4 +1,5 @@
-library(rcap)
+library(rcapture)
+library(testthat)
 context("Testing that the geoms run and return the correct objects")
 
 #-----------------------------------------------------------------------------
@@ -14,7 +15,7 @@ test_that("geom_timeline runs correctly", {
     ggplot2::theme(panel.background = ggplot2::element_blank(),
                    legend.position = "bottom",
                    axis.title.y = ggplot2::element_blank()) + ggplot2::xlab("DATE")
-  
+
   expect_is(plt, "gg")
   expect_is(plt, "ggplot")
 })
@@ -33,7 +34,7 @@ test_that("geom_timeline_label runs correctly", {
                    legend.position = "bottom",
                    axis.title.y = ggplot2::element_blank()) + ggplot2::xlab("DATE") +
     geom_timeline_label(data=earthquake_data)
-  
+
   expect_is(plt, "gg")
   expect_is(plt, "ggplot")
 })

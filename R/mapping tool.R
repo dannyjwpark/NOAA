@@ -4,6 +4,8 @@
 
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
+#' @name eq_map
+#'
 #' @title Plot a leaflet map with annotations
 #'
 #' @description We take a subset of our earthquake data and plot this on a map
@@ -56,6 +58,8 @@ eq_map <- function(earthquake_data, annot_col){
 
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
+#' @name eq_create_label
+#'
 #' @title Create an earthquake label column
 #'
 #' @description This function takes a dataframe (earthquake_data) and returns a character vector
