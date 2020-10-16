@@ -1,6 +1,6 @@
 # Leaflet for R website : https://rstudio.github.io/leaflet/
 #m = leaflet(earthquake_data) %>% addTiles()
-#m %>% addCircleMarkers(~lng, ~lat, radius = ~size)
+#m %>% addCircleMarkers(~long, ~lat, radius = ~size)
 
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ library(lubridate)
 #' @examples
 eq_map <- function(earthquake_data, annot_col){
   lmap <- earthquake_data %>% leaflet::leaflet() %>% leaflet::addTiles() %>%
-    leaflet::addCircleMarkers(lng=earthquake_data$LONGITUDE,
+    leaflet::addCircleMarkers(long=earthquake_data$LONGITUDE,
                               lat=earthquake_data$LATITUDE,
                               radius=earthquake_data$EQ_PRIMARY,
                               popup=earthquake_data[[annot_col]],
