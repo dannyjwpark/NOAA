@@ -1,0 +1,29 @@
+Package: NOAA
+Type: Package
+Title: NOAA Earthquakes
+Version: 0.1.0
+Author: Danny Park
+Maintainer: Danny Park <danincali@gmail.com>
+Description: Various analysis and visualization from U.S. National Oceanographic and Atmospheric Administration (NOAA)
+License: LGPL (>= 2.1)
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    devtools,
+    dplyr,
+    ggplot2,
+    grid,
+    knitr,
+    leaflet,
+    lubridate,
+    magrittr,
+    readr,
+    roxygen2,
+    rmarkdown,
+    scales,
+    stringr,
+    tidyr,
+    testthat,
+    usethis
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr
