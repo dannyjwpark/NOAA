@@ -1,6 +1,6 @@
 #devtools::use_testthat()
 Sys.setenv("R_TESTS" = "")
 library(testthat)
-library(rcap)
+library(NOAA)
 
-test_check("rcap")
+test_check("NOAA")

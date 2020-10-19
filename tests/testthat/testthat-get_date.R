@@ -1,4 +1,4 @@
-library(rcapture)
+library(Rcapture)
 library(testthat)
 context("Testing that the date column is created correctly from DAY, MONTH, YEAR")
 

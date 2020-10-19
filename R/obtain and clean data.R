@@ -1,7 +1,7 @@
-#library(readr)
-#library(magrittr)
-#library(dplyr)
-#library(stringr)
+##library(readr)
+##library(magrittr)
+##library(dplyr)
+##library(stringr)
 
 ### Date column: unites year, month, day
 ### LATITUDE & LONGITUDE: convert to numeric class
@@ -9,6 +9,8 @@
 ###   and converts names to title case (from all-caps)
 
 #----------------------------------------------------------------------------------------------
+#' @name load_data
+#'
 #' @title Module 1: Obtain and Clean Data
 #'
 #' @description Take raw data frame and return a clean data frame
@@ -23,17 +25,20 @@
 #'
 #' @examples
 #' \dontrun{
-#'   earthquake_data <- load_data()
-#'   print(class(earthquake_data))
-#'   head(earthquake_data)
+#'   df <- load_data()
+#'   print(class(df))
+#'   head(df)
 #' }
 #'
 
-load_data <- function(path = file.path("data_raw", "signif.txt")){
-    earthquake_data <- read.delim(path, sep = "\t")
-}
-#----------------------------------------------------------------------------------------------
 
+load_data <- function(path=file.path("data_raw", "signif.txt")){
+  df <- readr::read_delim(path, delim="\t")
+}
+
+#----------------------------------------------------------------------------------------------
+#' @name get_date
+#'
 #' @title Create a date from NOAA data given DAY, MONTH, YEAR
 #'
 #' @description The NOAA data has columns called DAY, MONTH, YEAR. Part of the requirements for
@@ -52,16 +57,13 @@ load_data <- function(path = file.path("data_raw", "signif.txt")){
 #'
 #' @examples
 #' \dontrun{
-#'   earthquake_data <- load_data() %>% dplyr::filter(YEAR >= 0) %>%
+#'   df <- load_data() %>% dplyr::filter(YEAR >= 0) %>%
 #'        dplyr::mutate(date = get_date(DAY, MONTH, YEAR))
-#'   print(class(earthquake_data))
-#'   head(earthquake_data)
+#'   print(class(df))
+#'   head(df)
 #' }
 #'
 get_date <- function(days, months, years){
-  #sum(is.na(earthquake_data$YEAR))  # [1] 0
-  #sum(is.na(earthquake_data$DAY))   # [1] 557
-  #sum(is.na(earthquake_data$MONTH)) # [1] 405
   n <- length(days)
   dates <- seq(as.Date(Sys.Date()), by=0, len=n)
   for(i in 1:n){
@@ -83,7 +85,7 @@ get_date <- function(days, months, years){
 #'
 #' @description This function takes the raw NOAA data and cleans it
 #'
-#' @param earthquake_data_raw
+#' @param df_raw
 #'
 #' @return Returns a cleaned dataframe
 #'
@@ -92,22 +94,22 @@ get_date <- function(days, months, years){
 #' @export
 #'
 #' @examples
-#' #' \dontrun{
-#'   earthquake_data <- load_data() %>% dplyr::filter(YEAR >= 0) %>%
+#' \dontrun{
+#'   df <- load_data() %>% dplyr::filter(YEAR >= 0) %>%
 #'        dplyr::mutate(date = get_date(DAY, MONTH, YEAR))
-#'   print(class(earthquake_data))
-#'   head(earthquake_data)
+#'   print(class(df))
+#'   head(df)
 #' }
 #'
-eq_clean_data <- function(earthquake_data_raw){
-  earthquake_data_raw <- earthquake_data
-  earthquake_data <- earthquake_data_raw %>%
-    select(col_names) %>%
-    dplyr::mutate(Date =paste(YEAR, MONTH, DAY)) %>%
-    dplyr::mutate(LATITUDE = as.numeric(LATITUDE), LONGITUDE = as.numeric(LONGITUDE))%>%
+eq_clean_data <- function(df_raw){
+  df <- df_raw
+  df <- df %>% dplyr::filter(YEAR >= 0) %>%
+    dplyr::mutate(date = get_date(DAY, MONTH, YEAR)) %>%
+    dplyr::mutate(LATITUDE = as.numeric(LATITUDE), LONGITUDE = as.numeric(LONGITUDE)) %>%
     eq_location_clean()
-    return(earthquake_data)
+  return(df)
 }
+
 #----------------------------------------------------------------------------------------------
 #' @name eq_location_clean
 #'
@@ -116,7 +118,7 @@ eq_clean_data <- function(earthquake_data_raw){
 #' @description eq_clean_data () function also needs functionality of clean LOCATION_NAME that is
 #' devoid of country name
 #'
-#' @param earthquake_data an object data frame
+#' @param df an object data frame
 #'
   #' @return Returns a cleaned dataframe as described
 #'
@@ -126,14 +128,34 @@ eq_clean_data <- function(earthquake_data_raw){
 #' @export
 #' @examples
 #' \dontrun{
-#'   earthquake_data <- load_data() %>% eq_location_clean()
-#'   print(class(earthquake_data))
-#'   head(earthquake_data)
+#'   df <- load_data() %>% eq_location_clean()
+#'   print(class(df))
+#'   head(df)
 #' }
 #'
 
-eq_location_clean <- function(earthquake_data){
-  earthquake_data <- earthquake_data %>% dplyr::mutate(CLEAN_LOCATION_NAME = stringr::str_trim(gsub(".*:","", LOCATION_NAME))) %>%
+eq_location_clean <- function(df){
+  df <- df %>% dplyr::mutate(CLEAN_LOCATION_NAME = stringr::str_trim(gsub(".*:","", LOCATION_NAME))) %>%
     dplyr::mutate(CLEAN_LOCATION_NAME = stringr::str_to_title(CLEAN_LOCATION_NAME))
-  return(earthquake_data)
+  return(df)
 }
+#----------------------------------------------------------------------------------------------
+
+## getwd()
+## if(!dir.exists("data_raw")){
+##  setwd('..') # go back to package directory
+## }
+
+## df_earthquakes <- load_data() %>% eq_clean_data()
+## if(!file.exists(file.path("data", "df_earthquakes.rda"))){
+  # package this cleaned data as part of the project
+##  library(devtools)
+##  devtools::use_data(df_earthquakes)
+## }
+
+## print(names(df_earthquakes))
+## print(head(df_earthquakes[c("YEAR", "MONTH", "DAY", "date")], 20)) # checking the date cleaning
+## print(tail(df_earthquakes[c("YEAR", "MONTH", "DAY", "date")], 20))
+## print("****************")
+## print(head(df_earthquakes)) # and for the location name
+## print(tail(df_earthquakes[c("LOCATION_NAME", "CLEAN_LOCATION_NAME")], 20))

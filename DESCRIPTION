@@ -5,9 +5,9 @@ Version: 0.1.0
 Author: Danny Park
 Maintainer: Danny Park <danincali@gmail.com>
 Description: Various analysis and visualization from U.S. National Oceanographic and Atmospheric Administration (NOAA)
-License: LGPL (>= 2.1)
-Encoding: UTF-8
-LazyData: true
+License: GPL-3
+LazyData: FALSE
+RoxygenNote: 7.1.1
 Imports: 
     devtools,
     dplyr,
@@ -24,6 +24,6 @@ Imports:
     stringr,
     tidyr,
     testthat,
-    usethis
-RoxygenNote: 7.1.1
+    usethis,
+    Rcapture
 VignetteBuilder: knitr

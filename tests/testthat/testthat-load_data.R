@@ -1,4 +1,4 @@
-library(rcapture)
+library(Rcapture)
 library(testthat)
 context("Testing that the raw data loads correctly")
 

@@ -1,4 +1,4 @@
-library(rcapture)
+library(Rcapture)
 library(testthat)
 context("Testing that the geoms run and return the correct objects")
 

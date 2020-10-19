@@ -45,12 +45,12 @@ library(lubridate)
 #' @export
 #'
 #' @examples
-eq_map <- function(earthquake_data, annot_col){
-  lmap <- earthquake_data %>% leaflet::leaflet() %>% leaflet::addTiles() %>%
-    leaflet::addCircleMarkers(long=earthquake_data$LONGITUDE,
-                              lat=earthquake_data$LATITUDE,
-                              radius=earthquake_data$EQ_PRIMARY,
-                              popup=earthquake_data[[annot_col]],
+eq_map <- function(df, annot_col){
+  lmap <- df %>% leaflet::leaflet() %>% leaflet::addTiles() %>%
+    leaflet::addCircleMarkers(lng=df$LONGITUDE,
+                              lat=df$LATITUDE,
+                              radius=df$EQ_PRIMARY,
+                              popup=df[[annot_col]],
                               color="blue",
                               weight=1,
                               opacity=0.5)
@@ -84,11 +84,11 @@ eq_map <- function(earthquake_data, annot_col){
 #'   eq_map(annot_col = "popup_text")
 #' print(map2)
 #' }
-eq_create_label <- function(earthquake_data){
-  len <- length(earthquake_data$CLEAN_LOCATION_NAME)
-  locations <- earthquake_data$CLEAN_LOCATION_NAME
-  magnitude <- earthquake_data$EQ_PRIMARY
-  deaths <- earthquake_data$DEATHS
+eq_create_label <- function(df){
+  len <- length(df$CLEAN_LOCATION_NAME)
+  locations <- df$CLEAN_LOCATION_NAME
+  magnitude <- df$EQ_PRIMARY
+  deaths <- df$DEATHS
 
   ptxt <- rep("", len)
   for(i in 1:len){
@@ -103,15 +103,15 @@ eq_create_label <- function(earthquake_data){
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
 
-map1 <-load_data() %>%
-        eq_clean_data() %>%
-        dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 2000) %>%
-        eq_map(annot_col = "date")
-print(map1)
+#map1 <-load_data() %>%
+#        eq_clean_data() %>%
+#        dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 2000) %>%
+#        eq_map(annot_col = "date")
+#print(map1)
 
-map2 <-load_data() %>%
-        eq_clean_data() %>%
-        dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 2000) %>%
-        dplyr::mutate(popup_text = eq_create_label(.)) %>%
-        eq_map(annot_col = "popup_text")
-print(map2)
+#map2 <-load_data() %>%
+#        eq_clean_data() %>%
+#        dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 2000) %>%
+#        dplyr::mutate(popup_text = eq_create_label(.)) %>%
+#        eq_map(annot_col = "popup_text")
+#print(map2)
