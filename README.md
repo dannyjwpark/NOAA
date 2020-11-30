@@ -12,3 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ## NOAA
 
 In this package, functions tidy and visualize data from the "U.S. National Oceanographic and Atmospheric Administration" "Significant Earthquakes". The visualizations include plotting the earthquakes along a timeline as well as on an interactive map.
+
+# travis.ci
+
+You can check the Travis.ci build on the following link:
+https://travis-ci.org/github/dannyjwpark/NOAA
